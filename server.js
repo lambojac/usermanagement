@@ -8,7 +8,7 @@ const connectDB=require("./config/dbConn")
 const mongoose=require("mongoose")
 const {logEvents}=require('./middleware/logger')
 console.log(process.env.NODE_ENV)
-
+connectDB()
 const errorHandler=require("./middleware/errorHandler")
 const cookieParser=require('cookie-parser')
 const cors=require('cors')
@@ -31,4 +31,11 @@ app.use(cors(corsOption))
  })
 
 app.use(errorHandler)
- app.listen(PORT,()=>console.log(`server running on port ${PORT} `))
+mongoose.connection.once('open',()=>{
+    console.log('connected to mongodb')
+    app.listen(PORT,()=>console.log(`server running on port ${PORT} `))
+})
+mongoose.connection.on('error',err=>{
+    console.log(err)
+    logEvents(`${err.no}:${err.code}\t${err.syscall}\t${err.hostname},'mongoErrLog.log`)
+})
