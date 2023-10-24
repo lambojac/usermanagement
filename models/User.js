@@ -6,11 +6,11 @@ const userSchema=new mongoose.Schema({
         required:true,
      },
      password:{
-        type:string,
+        type:String,
         required:true
      },
      roles:[{
-        type:string,
+        type:String,
         default:"Employee"
      }],
      active:{
