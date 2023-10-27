@@ -26,7 +26,7 @@ res.json(users)
 //@route patch /user
 
 const createNewUser=asyncHandler (async(req,res)=>{
-const {username,password, roles}=req.body
+const {username, password, roles}=req.body
 //confirm data
 if(!username||!password||!Array.isArray(roles)||!roles.length){
     return res.status(400).json({message:"All fields are required"})
