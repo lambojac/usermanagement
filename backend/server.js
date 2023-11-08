@@ -18,11 +18,10 @@ const cookieParser=require('cookie-parser')
 const cors=require('cors')
 // app.use(logger)
 app.use("/",express.static(path.join(__dirname,'/public')))
-
 const corsOption=require('./config/corsoptions')
 app.use(express.json())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({extended:true}))
 
 app.use("/",require("./routes/root"))
 app.use('/users',require('./routes/userRoutes'))
